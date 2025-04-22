@@ -112,7 +112,7 @@ export default function Create() {
               name="password"
               className="border p-2 rounded-md text-sm/5"
             />
-            <input
+            <Input
               type="password"
               placeholder="Confirme sua senha"
               id="confirmPassword"
