@@ -10,7 +10,7 @@ import {
 
 import express from "express";
 import bodyParser from "body-parser";
-import cors from "cors";;
+import cors from "cors";
 var app = express();
 var router = express.Router();
 
