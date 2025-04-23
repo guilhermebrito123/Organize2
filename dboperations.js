@@ -1,7 +1,7 @@
 //é aqui onde fazemos nossas operações CRUD
 
-var config = require("./dbconfig");
-const sql = require("mssql");
+import { config } from "./dbconfig.js";
+import sql from "mssql";
 
 async function getUsuarios() {
   try {
@@ -29,7 +29,8 @@ async function updateUsuario(usuario) {
     `);
     return usuario.recordsets;
   } catch (error) {
-    console.log(error);
+    console.error("Erro ao atualizar usuário", error);
+    throw error;
   }
 }
 
@@ -38,7 +39,7 @@ async function getUsuario(usuarioId) {
     let pool = await sql.connect(config);
     let organize = await pool
       .request()
-      .input("input_parameter", sql.Int, usuario.Id)
+      .input("input_parameter", sql.Int, usuarioId)
       .query("select * from [dbo].[Usuarios] WHERE ID = @input_parameter");
     return organize.recordsets;
   } catch (error) {
@@ -52,7 +53,7 @@ async function delUsuario(usuarioId) {
     let pool = await sql.connect(config);
     let organize = await pool
       .request()
-      .input("input_parameter", sql.Int, usuario.Id)
+      .input("input_parameter", sql.Int, usuarioId)
       .query("DELETE from [dbo].[Usuarios] WHERE ID = @input_parameter");
     return organize.recordsets;
   } catch (error) {
@@ -83,10 +84,4 @@ async function addUsuario(usuario) {
   }
 }
 
-module.exports = {
-  getUsuarios: getUsuarios,
-  updateUsuario: updateUsuario,
-  getUsuario: getUsuario,
-  delUsuario: delUsuario,
-  addUsuario: addUsuario
-};
+export { getUsuarios, updateUsuario, getUsuario, delUsuario, addUsuario };

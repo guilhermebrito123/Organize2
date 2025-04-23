@@ -7,13 +7,13 @@ const config = {
     options: {
       userName: "sa",
       password: "2001guib",
-    },
-    options: {
-      encrypt: false,
-      database: "Organize",
-    },
-    port: 55786,
+    }    
   },
+  options: {
+    encrypt: false,
+    database: "Organize",
+  },
+  port: 55786,
 };
 
-module.exports = config;
+export {config};

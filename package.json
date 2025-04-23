@@ -62,7 +62,7 @@
     "type": "git",
     "url": "git+https://github.com/guilhermebrito123/Organize2.git"
   },
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/guilhermebrito123/Organize2/issues"
   },
