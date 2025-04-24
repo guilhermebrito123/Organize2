@@ -17,7 +17,7 @@ async function getUsuarios() {
 async function updateUsuario(usuario) {
   try {
     let pool = await sql.connect(config);
-    let usuario = await pool
+    let usuarios = await pool
       .request()
       .input("input_parameter", sql.Int, usuario.Id)
       .query(`Update [dbo].[Usuarios]
