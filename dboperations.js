@@ -27,7 +27,7 @@ async function updateUsuario(usuario) {
     [Senha] = '${usuario.Senha}'
     WHERE ID = @input_parameter
     `);
-    return usuario.recordsets;
+    return usuarios.recordsets;
   } catch (error) {
     console.error("Erro ao atualizar usuário", error);
     throw error;

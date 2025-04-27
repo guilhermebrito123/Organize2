@@ -7,7 +7,7 @@ const config = {
     options: {
       userName: "sa",
       password: "2001guib",
-    }    
+    },
   },
   options: {
     encrypt: false,
@@ -16,4 +16,4 @@ const config = {
   port: 55786,
 };
 
-export {config};
+export { config };
