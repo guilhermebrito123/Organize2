@@ -3,8 +3,19 @@
 import { useState } from "react";
 import SelectMulti, { StylesConfig } from "react-select";
 import { Button, buttonVariants } from "@/components/ui/button";
-import Link from 'next/link'
+import Link from "next/link";
 import { cn } from "@/lib/utils";
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 export default function Task_assignment() {
   const tasks = [
@@ -36,7 +47,46 @@ export default function Task_assignment() {
       dateDue: "20/06/2025",
       members: ["Guilherme", "Pedro", "Jefferson"],
     },
+    {
+      id: 5,
+      Título: "Tarefa 4",
+      task_Group: "Equipe 4",
+      dateDue: "20/06/2025",
+      members: ["Guilherme", "Pedro", "Jefferson"],
+    },
+    {
+      id: 6,
+      Título: "Tarefa 4",
+      task_Group: "Equipe 4",
+      dateDue: "20/06/2025",
+      members: ["Guilherme", "Pedro", "Jefferson"],
+    },
+    {
+      id: 7,
+      Título: "Tarefa 4",
+      task_Group: "Equipe 4",
+      dateDue: "20/06/2025",
+      members: ["Guilherme", "Pedro", "Jefferson"],
+    },
+    {
+      id: 8,
+      Título: "Tarefa 4",
+      task_Group: "Equipe 4",
+      dateDue: "20/06/2025",
+      members: ["Guilherme", "Pedro", "Jefferson"],
+    },
   ];
+
+  const [priority, setPriority] = React.useState("");
+  const [status, setStatus] = React.useState("");
+
+  const handlePriority = (event) => {
+    setPriority(event.target.value);
+  };
+
+  const handleStatus = (event) => {
+    setStatus(event.target.value);
+  };
 
   // Alterando para armazenar as seleções de cada tarefa individualmente
   const [selectedOptions, setSelectedOptions] = useState(
@@ -61,7 +111,7 @@ export default function Task_assignment() {
     control: (provided) => ({
       ...provided,
       backgroundColor: "transparent", // Torna o fundo do seletor transparente
-      border: "1px solid #ffbf00", // Altere a borda do controle
+      //border: "1px solid #ffbf00", Altere a borda do controle
     }),
     multiValue: (provided) => ({
       ...provided,
@@ -100,7 +150,7 @@ export default function Task_assignment() {
         </p>
       </div>
       <hr />
-      <ul className="flex flex-col gap-5 my-5">
+      <ul className="flex md:flex-row flex-wrap sm:flex-col flex-col gap-5 justify-center my-5">
         {tasks.map((task) => {
           // Convertendo os membros em objetos no formato { value: "nome", label: "nome" }
           const membersOptions = task.members.map((member) => ({
@@ -110,33 +160,73 @@ export default function Task_assignment() {
 
           return (
             <li
-              className="bg-linear-to-t from-sky-500 to-indigo-500 border-2 rounded-lg text-white p-3 flex flex-row gap-5 items-center"
               key={task.id}
+              className="lg:w-[23%] md:w-[25%] sm:w-[100%] w-[100%]"
             >
-              <span>{task.Título}</span>
-              <span>{task.task_Group}</span>
-              <span>{task.dateDue}</span>
-              <div className="flex flex-col rounded-md border bg-[#ffbf00] p-2 lg:w-[400px]">
-                <SelectMulti
-                  isMulti
-                  options={membersOptions} // Passando as opções dos membros
-                  value={selectedOptions[task.id]} // Vinculando a seleção à tarefa específica
-                  onChange={(membersOptions) =>
-                    handleSelectChange(task.id, membersOptions)
-                  } // Passando o índice da tarefa
-                  classNamePrefix="custom-select"
-                  styles={customStyles} // Aplica os estilos personalizados
-                />
-              </div>
-              <Button variant="secondary" size="sm">
-                Atribuir
-              </Button>
-                <Link href="./task_Edit">
-                  <Button variant="secondary" size="sm">
-                    Editar
-                  </Button>
-                </Link>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ArrowDownwardIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
+                >
+                  <Typography component="span">Accordion 1</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="flex flex-col rounded-md border bg-[white] p-2 w-[100%]">
+                    <SelectMulti
+                      isMulti
+                      options={membersOptions} // Passando as opções dos membros
+                      value={selectedOptions[task.id]} // Vinculando a seleção à tarefa específica
+                      onChange={(membersOptions) =>
+                        handleSelectChange(task.id, membersOptions)
+                      } // Passando o índice da tarefa
+                      classNamePrefix="custom-select"
+                      styles={customStyles} // Aplica os estilos personalizados
+                    />
+                  </div>
+                </AccordionDetails>
+                <div className="flex flex-col jusitfy-center p-2">
+                  <FormControl variant="filled" sx={{ m: 1, minWidth: "80%" }}>
+                    <InputLabel id="demo-simple-select-filled-label">
+                      Prioridade
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-filled-label"
+                      id="demo-simple-select-filled"
+                      value={priority}
+                      onChange={handlePriority}
+                    >
+                      <MenuItem value={10}>Baixa</MenuItem>
+                      <MenuItem value={20}>Média</MenuItem>
+                      <MenuItem value={30}>Alta</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl variant="filled" sx={{ m: 1, minWidth: "80%" }}>
+                    <InputLabel id="demo-simple-select-filled-label">
+                      Status
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-filled-label"
+                      id="demo-simple-select-filled"
+                      value={status}
+                      onChange={handleStatus}
+                    >
+                      <MenuItem value={10}>Pendente</MenuItem>
+                      <MenuItem value={20}>Em andamento</MenuItem>
+                      <MenuItem value={30}>Concluída</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
+                <div className="flex flex-row justify-evenly items-center p-2">
+                  <Button variant="secondary">Atribuir</Button>
 
+                  <Button variant="secondary">
+                    <Link href="./task_Edit">Editar</Link>
+                  </Button>
+
+                  <Button variant="secondary">Deletar</Button>
+                </div>
+              </Accordion>
             </li>
           );
         })}
